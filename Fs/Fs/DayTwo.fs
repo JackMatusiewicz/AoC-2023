@@ -35,3 +35,23 @@ module DayTwo =
         |> List.filter snd
         |> List.map fst
         |> List.sum
+
+    let attemptUpdate (existing: Map<string, int>) k v =
+        if not <| Map.containsKey k existing then
+            Map.add k v existing
+        else
+            Map.add k (max v (Map.find k existing)) existing
+
+    let condenseMaps (maps : Map<string, int> list) : Map<string, int> =
+        List.fold (Map.fold attemptUpdate) Map.empty maps
+
+    let computePower (map : Map<string, int>) : int =
+        Map.fold (fun s _ v -> s * v) 1 map
+
+    let computePartTwo (fileName: string) : int =
+        parseBags fileName
+        |> List.map (List.map parseRound)
+        |> List.map condenseMaps
+        |> List.map computePower
+        |> List.sum
+        
