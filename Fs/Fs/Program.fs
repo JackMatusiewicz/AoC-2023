@@ -4,5 +4,5 @@ module Program =
 
     [<EntryPoint>]
     let main _ =
-        printfn "%d" <| DayTwo.computePartTwo "Data\\DayTwoData.txt"
+        printfn "%d" <| DayThree.computePartOne "Data\\DayThreeData.txt"
         0
